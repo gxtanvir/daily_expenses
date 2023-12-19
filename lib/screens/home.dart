@@ -1,3 +1,4 @@
+import 'package:daily_expense/widgets/new_expense.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,15 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+
+              context: context,
+              builder: (ctx) {
+                return NewExpense();
+              });
+        },
         icon: const Icon(Icons.add),
         label: const Text('Add New Book'),
       ),
