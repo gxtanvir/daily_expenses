@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 final _firebaseAuth = FirebaseAuth.instance;
 
@@ -37,12 +38,17 @@ class _AuthSrceenState extends State<AuthScreen> {
       if (_isLogin) {
         final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
             email: _enteredEmail, password: _enterdPassword);
-        print(userCredential);
       } else {
         final userCredential =
             await _firebaseAuth.createUserWithEmailAndPassword(
                 email: _enteredEmail, password: _enterdPassword);
-        print(userCredential);
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(userCredential.user!.uid)
+            .set({
+          'name': _userName,
+          'email': _enteredEmail,
+        });
       }
     } on FirebaseAuthException catch (error) {
       ScaffoldMessenger.of(context).clearSnackBars();

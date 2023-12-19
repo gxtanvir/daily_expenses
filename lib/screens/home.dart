@@ -33,24 +33,42 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        icon: const Icon(Icons.add),
+        label: const Text('Add New Book'),
+      ),
       body: Column(
-        mainAxisSize: MainAxisSize.max,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            width: double.infinity,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Your Book'),
+                const Text(
+                  'Your Books',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.textsms_sharp)),
-                    IconButton(onPressed: () {}, icon: Icon(Icons.search)),
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.sort,
+                          size: 35,
+                        )),
+                    IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.search,
+                          size: 35,
+                        )),
                   ],
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
