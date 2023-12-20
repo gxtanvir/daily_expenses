@@ -1,4 +1,4 @@
-import 'package:daily_expense/widgets/new_expense.dart';
+import 'package:daily_expense/widgets/new_book.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         leading: Icon(
           Icons.account_balance_wallet_outlined,
           color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -37,12 +37,16 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           showModalBottomSheet(
-              backgroundColor: Theme.of(context).colorScheme.tertiary,
-
-              context: context,
-              builder: (ctx) {
-                return NewExpense();
-              });
+            isScrollControlled: true,
+            context: context,
+            builder: (ctx) {
+              return const NewExpense();
+            },
+            backgroundColor: Theme.of(context).colorScheme.surface,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            useSafeArea: true,
+          );
         },
         icon: const Icon(Icons.add),
         label: const Text('Add New Book'),
