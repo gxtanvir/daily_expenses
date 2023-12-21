@@ -1,14 +1,18 @@
 import 'package:daily_expense/widgets/new_book.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:daily_expense/providers/add_book_provider.dart';
+
 
 final _firebaseAuth = FirebaseAuth.instance;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final books = ref.watch(newBooksProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
@@ -66,7 +70,8 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                        },
                         icon: const Icon(
                           Icons.sort,
                           size: 35,
@@ -82,6 +87,10 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+          if(books.isEmpty)
+          Center(child: Text('Try adding new Books'),),
+          if(books.isNotEmpty)
+          ListTile(leading: const Icon(Icons.book), title: Text(books[0].title)),
         ],
       ),
     );

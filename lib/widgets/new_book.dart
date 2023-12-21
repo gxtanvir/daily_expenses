@@ -1,15 +1,18 @@
+import 'package:daily_expense/models/book.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:daily_expense/providers/add_book_provider.dart';
 
-class NewExpense extends StatefulWidget {
+class NewExpense extends ConsumerStatefulWidget {
   const NewExpense({super.key});
 
   @override
-  State<NewExpense> createState() {
+  ConsumerState<NewExpense> createState() {
     return _NewExpenseState();
   }
 }
 
-class _NewExpenseState extends State<NewExpense> {
+class _NewExpenseState extends ConsumerState<NewExpense> {
   final _bookController = TextEditingController();
 
   @override
@@ -38,8 +41,11 @@ class _NewExpenseState extends State<NewExpense> {
           ],
         ),
       );
+      return;
     }
-    print(_enteredBookName);
+    ref.watch(newBooksProvider.notifier).addBook(
+          Book(title: _enteredBookName),
+        );
   }
 
   @override
