@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:daily_expense/providers/add_book_provider.dart';
 
-
 final _firebaseAuth = FirebaseAuth.instance;
 
 class HomeScreen extends ConsumerWidget {
@@ -70,8 +69,7 @@ class HomeScreen extends ConsumerWidget {
                 Row(
                   children: [
                     IconButton(
-                        onPressed: () {
-                        },
+                        onPressed: () {},
                         icon: const Icon(
                           Icons.sort,
                           size: 35,
@@ -87,10 +85,27 @@ class HomeScreen extends ConsumerWidget {
               ],
             ),
           ),
-          if(books.isEmpty)
-          Center(child: Text('Try adding new Books'),),
-          if(books.isNotEmpty)
-          ListTile(leading: const Icon(Icons.book), title: Text(books[0].title)),
+          if (books.isEmpty)
+            const Center(
+              child: Text('Try adding new Books'),
+            ),
+          if (books.isNotEmpty)
+            Expanded(
+              child: ListView.builder(
+                  itemCount: books.length,
+                  itemBuilder: (ctx, index) {
+                    return Card(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.book_rounded,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                        title: Text(books[index].title),
+                        subtitle: const Text('Created 1 day ago'),
+                      ),
+                    );
+                  }),
+            )
         ],
       ),
     );
