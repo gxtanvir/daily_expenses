@@ -2,7 +2,7 @@ import 'package:daily_expense/widgets/new_book.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:daily_expense/providers/add_book_provider.dart';
+import 'package:daily_expense/providers/manage_book_provider.dart';
 
 final _firebaseAuth = FirebaseAuth.instance;
 
@@ -11,7 +11,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final books = ref.watch(newBooksProvider);
+    final books = ref.watch(manageBooksProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
@@ -102,6 +102,17 @@ class HomeScreen extends ConsumerWidget {
                         ),
                         title: Text(books[index].title),
                         subtitle: const Text('Created 1 day ago'),
+                        
+                        trailing: IconButton(
+                            onPressed: () {
+                              ref
+                                  .read(manageBooksProvider.notifier)
+                                  .removeBook(books[index]);
+                            },
+                            icon: Icon(
+                              Icons.delete,
+                              color: Theme.of(context).colorScheme.error,
+                            )),
                       ),
                     );
                   }),

@@ -1,7 +1,7 @@
 import 'package:daily_expense/models/book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:daily_expense/providers/add_book_provider.dart';
+import 'package:daily_expense/providers/manage_book_provider.dart';
 
 class NewExpense extends ConsumerStatefulWidget {
   const NewExpense({super.key});
@@ -43,9 +43,10 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
       );
       return;
     }
-    ref.watch(newBooksProvider.notifier).addBook(
+    ref.watch(manageBooksProvider.notifier).addBook(
           Book(title: _enteredBookName),
         );
+    Navigator.of(context).pop();
   }
 
   @override
