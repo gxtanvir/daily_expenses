@@ -94,25 +94,46 @@ class HomeScreen extends ConsumerWidget {
               child: ListView.builder(
                   itemCount: books.length,
                   itemBuilder: (ctx, index) {
-                    return Card(
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.book_rounded,
-                          color: Theme.of(context).colorScheme.primary,
+                    return Dismissible(
+                      background: Card(
+                        color: Theme.of(context).colorScheme.errorContainer,
+                      ),
+                      key: ValueKey(books[index]),
+                      onDismissed: (direction) {
+                        ref
+                            .read(manageBooksProvider.notifier)
+                            .removeBook(books[index]);
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: const Duration(seconds: 3),
+                            action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  ref
+                                      .read(manageBooksProvider.notifier)
+                                      .addBook(
+                                        books[index],
+                                      );
+                                }),
+                            content: const Text('Book removed!'),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.book_rounded,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          title: Text(books[index].title),
+                          subtitle: const Text('Created 1 day ago'),
+                          trailing: const Text(
+                            '478',
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.bold),
+                          ),
                         ),
-                        title: Text(books[index].title),
-                        subtitle: const Text('Created 1 day ago'),
-                        
-                        trailing: IconButton(
-                            onPressed: () {
-                              ref
-                                  .read(manageBooksProvider.notifier)
-                                  .removeBook(books[index]);
-                            },
-                            icon: Icon(
-                              Icons.delete,
-                              color: Theme.of(context).colorScheme.error,
-                            )),
                       ),
                     );
                   }),
