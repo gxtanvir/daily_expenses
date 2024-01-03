@@ -43,7 +43,7 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
       );
       return;
     }
-    ref.watch(manageBooksProvider.notifier).addBook(
+    ref.read(manageBooksProvider.notifier).addBook(
           Book(title: _enteredBookName),
         );
     Navigator.of(context).pop();

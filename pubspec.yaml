@@ -41,6 +41,9 @@ dependencies:
   uuid: ^4.2.2
   riverpod: ^2.4.9
   flutter_riverpod: ^2.4.9
+  path: ^1.8.3
+  path_provider: ^2.1.1
+  sqflite: ^2.3.0
 
 dev_dependencies:
   flutter_test:

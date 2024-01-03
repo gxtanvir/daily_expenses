@@ -12,7 +12,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-   const ProviderScope(child: MyApp(),),
+    const ProviderScope(
+      child: MyApp(),
+    ),
   );
 }
 
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData().copyWith(
           colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 121, 168, 82)),
+              seedColor: const Color.fromARGB(255, 102, 211, 13)),
         ),
         home: StreamBuilder(
             stream: FirebaseAuth.instance.userChanges(),
