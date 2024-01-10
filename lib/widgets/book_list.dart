@@ -1,4 +1,5 @@
 import 'package:daily_expense/models/book.dart';
+import 'package:daily_expense/screens/search_book.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_expense/providers/manage_book_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,7 +11,7 @@ class BookList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   return Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
@@ -31,7 +32,10 @@ class BookList extends ConsumerWidget {
                         size: 35,
                       )),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (ctx) => SearchBook()));
+                      },
                       icon: const Icon(
                         Icons.search,
                         size: 35,

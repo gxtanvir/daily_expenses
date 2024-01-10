@@ -8,14 +8,15 @@ class Time extends StatelessWidget {
   Widget build(BuildContext context) {
     final nowTime = DateTime.now();
     final diff = nowTime.difference(dtime);
-    if (diff.inSeconds < 60) {
-      return Text('Created ${diff.inSeconds} seconds ago.');
-    } else if (diff.inSeconds < 3600) {
-      return Text('Created ${diff.inMinutes} minutes ago.');
-    } else if (diff.inHours < 86400) {
-      return Text('Created ${diff.inHours} hours ago');
-    } else {
-      return Text('Created on $dtime');
+    if (diff.inSeconds <= 60) {
+      return Text('Created ${diff.inSeconds + 1} seconds ago.');
     }
+    if (diff.inSeconds <= 3600) {
+      return Text('Created ${diff.inMinutes} minutes ago.');
+    }
+    if (diff.inHours <= 24) {
+      return Text('Created ${diff.inHours} hours ago');
+    }
+    return Text('Created on $dtime');
   }
 }

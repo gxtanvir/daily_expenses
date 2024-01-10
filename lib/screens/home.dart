@@ -17,6 +17,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   late Future<void> _bookFuture;
+  // bool isSearching = false;
 
   @override
   void initState() {
@@ -26,8 +27,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // // On Search
+    // void onSearch() {
+    //   setState(() {
+    //     isSearching = true;
+    //   });
+    // }
+
     final books = ref.watch(manageBooksProvider);
     return Scaffold(
+
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         leading: Icon(
