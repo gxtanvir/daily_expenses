@@ -1,4 +1,5 @@
 import 'package:daily_expense/models/book.dart';
+import 'package:daily_expense/screens/expenses.dart';
 import 'package:daily_expense/screens/search_book.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_expense/providers/manage_book_provider.dart';
@@ -91,6 +92,14 @@ class BookList extends ConsumerWidget {
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (ctx) =>
+                                  ExpensesScreen(book: books[index]),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   );

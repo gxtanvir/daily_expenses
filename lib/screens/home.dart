@@ -36,7 +36,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     final books = ref.watch(manageBooksProvider);
     return Scaffold(
-
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         leading: Icon(

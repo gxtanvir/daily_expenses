@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData().copyWith(
           colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 102, 211, 13)),
+              seedColor: Color.fromARGB(255, 13, 211, 119)),
         ),
         home: StreamBuilder(
             stream: FirebaseAuth.instance.userChanges(),
