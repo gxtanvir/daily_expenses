@@ -1,4 +1,6 @@
+import 'package:daily_expense/data/dummy.dart';
 import 'package:daily_expense/models/book.dart';
+import 'package:daily_expense/widgets/expense_card.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesScreen extends StatelessWidget {
@@ -7,20 +9,13 @@ class ExpensesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _color = Theme.of(context).colorScheme;
     return Scaffold(
         appBar: AppBar(
           title: Text(book.title),
           backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         ),
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              _color.primaryContainer.withOpacity(.3),
-              _color.primaryContainer.withOpacity(.1)
-            ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
-          ),
           child: Column(
             children: [
               const SizedBox(
@@ -91,7 +86,7 @@ class ExpensesScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Total In',
+                          'Total In (+)',
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         Text(
@@ -105,7 +100,7 @@ class ExpensesScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Total Out',
+                          'Total Out (-)',
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                         Text(
@@ -132,6 +127,32 @@ class ExpensesScreen extends StatelessWidget {
                       ],
                     ),
                   ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    const Expanded(
+                        child: Divider(
+                      endIndent: 10,
+                    )),
+                    Text(
+                      'Showing ${dummyExpenses.length} entries',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const Expanded(
+                        child: Divider(
+                      indent: 10,
+                    )),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: dummyExpenses.length,
+                  itemBuilder: (context, index) =>
+                      ExpenseCard(expense: dummyExpenses[index]),
                 ),
               )
             ],

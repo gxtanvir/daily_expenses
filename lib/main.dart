@@ -27,8 +27,9 @@ class MyApp extends StatelessWidget {
         title: 'Khoroch Shomogro',
         debugShowCheckedModeBanner: false,
         theme: ThemeData().copyWith(
+          useMaterial3: false,
           colorScheme: ColorScheme.fromSeed(
-              seedColor: Color.fromARGB(255, 13, 211, 119)),
+              seedColor: const Color.fromARGB(255, 13, 211, 119)),
         ),
         home: StreamBuilder(
             stream: FirebaseAuth.instance.userChanges(),
