@@ -1,6 +1,7 @@
 import 'package:daily_expense/data/dummy.dart';
 import 'package:daily_expense/models/book.dart';
 import 'package:daily_expense/widgets/expense_card.dart';
+import 'package:daily_expense/widgets/expense_summery.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesScreen extends StatelessWidget {
@@ -10,153 +11,118 @@ class ExpensesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(book.title),
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+      backgroundColor: const Color.fromARGB(255, 236, 236, 235),
+      appBar: AppBar(
+        title: Text(
+          book.title,
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).colorScheme.onPrimaryContainer),
         ),
-        body: SizedBox(
-          width: double.infinity,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 4,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                    width: double.infinity,
-                    height: 50,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .surfaceVariant
-                            .withOpacity(.4)),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.search,
-                          size: 25,
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          'Search your expenses',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onBackground
-                                  .withOpacity(.3)),
-                        )
-                      ],
-                    )),
-              ),
-              const Divider(
-                height: 6,
-                thickness: 2,
-              ),
-              Container(
-                margin: const EdgeInsets.all(20),
-                padding: const EdgeInsets.all(15),
+        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+      ),
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 4,
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Container(
                 width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surfaceVariant,
-                  shape: BoxShape.rectangle,
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Net Balance',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        Text(
-                          '7837',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                      height: 20,
-                      thickness: 2,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Total In (+)',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        Text(
-                          '7837',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Total Out (-)',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        Text(
-                          '500',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                      height: 20,
-                      thickness: 2,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Total Out',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        Text(
-                          '500',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                height: 50,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: const BoxDecoration(
+                    shape: BoxShape.rectangle, color: Colors.white),
                 child: Row(
                   children: [
-                    const Expanded(
-                        child: Divider(
-                      endIndent: 10,
-                    )),
-                    Text(
-                      'Showing ${dummyExpenses.length} entries',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    const Icon(
+                      Icons.search,
+                      size: 25,
                     ),
-                    const Expanded(
-                        child: Divider(
-                      indent: 10,
-                    )),
+                    const SizedBox(width: 10),
+                    Text(
+                      'Search your expenses',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onBackground
+                              .withOpacity(.3)),
+                    )
                   ],
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: dummyExpenses.length,
-                  itemBuilder: (context, index) =>
-                      ExpenseCard(expense: dummyExpenses[index]),
-                ),
-              )
-            ],
-          ),
-        ));
+            ),
+            const Summery(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                children: [
+                  const Expanded(
+                      child: Divider(
+                    endIndent: 10,
+                  )),
+                  Text(
+                    'Showing ${dummyExpenses.length} entries',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const Expanded(
+                      child: Divider(
+                    indent: 10,
+                  )),
+                ],
+              ),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                itemCount: dummyExpenses.length,
+                itemBuilder: (context, index) =>
+                    ExpenseCard(expense: dummyExpenses[index]),
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomSheet: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(15),
+        decoration: const BoxDecoration(
+          shape: BoxShape.rectangle,
+          gradient: LinearGradient(colors: [
+            Color.fromARGB(64, 202, 212, 206),
+            Color.fromARGB(248, 255, 255, 255),
+            Color.fromARGB(255, 255, 255, 255),
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+              ),
+              onPressed: () {},
+              icon: const Icon(Icons.add),
+              label: const Text('Cash In'),
+            ),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                backgroundColor: Theme.of(context).colorScheme.error,
+              ),
+              onPressed: () {},
+              icon: const Icon(Icons.delete),
+              label: const Text('Cash Out'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

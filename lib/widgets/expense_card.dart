@@ -8,12 +8,15 @@ class ExpenseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       width: double.infinity,
       decoration: const BoxDecoration(
-          border: BorderDirectional(bottom: BorderSide(width: 1)),
-          borderRadius: BorderRadius.all(Radius.circular(6))),
+        color: Colors.white,
+        borderRadius: BorderRadius.all(
+          Radius.circular(6),
+        ),
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -32,7 +35,7 @@ class ExpenseCard extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 6),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
