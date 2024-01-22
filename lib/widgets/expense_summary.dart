@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Summery extends StatelessWidget {
-  const Summery({super.key});
+class summary extends StatelessWidget {
+  const summary({super.key});
 
   @override
   Widget build(BuildContext context) {

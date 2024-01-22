@@ -75,6 +75,7 @@ class _AuthSrceenState extends State<AuthScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
+              
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

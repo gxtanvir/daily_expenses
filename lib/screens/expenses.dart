@@ -1,7 +1,8 @@
 import 'package:daily_expense/data/dummy.dart';
 import 'package:daily_expense/models/book.dart';
+import 'package:daily_expense/screens/add_expense.dart';
 import 'package:daily_expense/widgets/expense_card.dart';
-import 'package:daily_expense/widgets/expense_summery.dart';
+import 'package:daily_expense/widgets/expense_summary.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesScreen extends StatelessWidget {
@@ -56,7 +57,7 @@ class ExpensesScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Summery(),
+            const summary(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
@@ -106,7 +107,10 @@ class ExpensesScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (ctx) => AddExpense()));
+              },
               icon: const Icon(Icons.add),
               label: const Text('Cash In'),
             ),
