@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: false,
           colorScheme: ColorScheme.fromSeed(
               seedColor: const Color.fromARGB(255, 13, 211, 119)),
+          appBarTheme: AppBarTheme().copyWith()
         ),
         home: StreamBuilder(
             stream: FirebaseAuth.instance.userChanges(),

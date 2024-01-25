@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+final formatter = DateFormat.yMMMMd();
 
 class Time extends StatelessWidget {
   const Time({super.key, required this.dtime});
@@ -17,6 +20,6 @@ class Time extends StatelessWidget {
     if (diff.inHours <= 24) {
       return Text('Created ${diff.inHours} hours ago');
     }
-    return Text('Created on $dtime');
+    return Text('Created on ${formatter.format(dtime)}');
   }
 }
