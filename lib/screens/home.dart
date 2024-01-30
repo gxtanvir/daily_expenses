@@ -37,16 +37,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final books = ref.watch(manageBooksProvider);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
         leading: Icon(
           Icons.account_balance_wallet_outlined,
           color: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
-        title: Text(
+        title: const Text(
           'Khoroch Shomogro',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onPrimaryContainer),
         ),
         actions: [
           IconButton(

@@ -16,9 +16,6 @@ class ExpensesScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           book.title,
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.onPrimaryContainer),
         ),
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       ),
@@ -97,7 +94,7 @@ class ExpensesScreen extends StatelessWidget {
             Color.fromARGB(64, 202, 212, 206),
             Color.fromARGB(248, 255, 255, 255),
             Color.fromARGB(255, 255, 255, 255),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+          ], begin: Alignment.topCenter, end: Alignment.bottomCenter,),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

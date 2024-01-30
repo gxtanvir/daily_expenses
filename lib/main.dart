@@ -6,6 +6,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final kColorScheme = ColorScheme.fromSeed(
+  seedColor: const Color.fromARGB(255, 13, 211, 119),
+);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -28,9 +32,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData().copyWith(
           useMaterial3: false,
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 13, 211, 119)),
-          appBarTheme: AppBarTheme().copyWith()
+          colorScheme: kColorScheme,
+          appBarTheme: AppBarTheme(
+            backgroundColor: kColorScheme.secondaryContainer,
+            titleTextStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: kColorScheme.onPrimaryContainer),
+          ),
         ),
         home: StreamBuilder(
             stream: FirebaseAuth.instance.userChanges(),
