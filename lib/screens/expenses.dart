@@ -90,11 +90,15 @@ class ExpensesScreen extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         decoration: const BoxDecoration(
           shape: BoxShape.rectangle,
-          gradient: LinearGradient(colors: [
-            Color.fromARGB(64, 202, 212, 206),
-            Color.fromARGB(248, 255, 255, 255),
-            Color.fromARGB(255, 255, 255, 255),
-          ], begin: Alignment.topCenter, end: Alignment.bottomCenter,),
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(64, 202, 212, 206),
+              Color.fromARGB(248, 255, 255, 255),
+              Color.fromARGB(255, 255, 255, 255),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -117,7 +121,10 @@ class ExpensesScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                 backgroundColor: Theme.of(context).colorScheme.error,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (ctx) => AddExpense()));
+              },
               icon: const Icon(Icons.delete),
               label: const Text('Cash Out'),
             ),

@@ -11,6 +11,7 @@ class AddExpense extends StatefulWidget {
 }
 
 class _AddExpense extends State<AddExpense> {
+  bool _isCashIn = true;
   var _amount = "";
   var _remarks = "";
   DateTime? _selectedDate = DateTime.now();
@@ -20,7 +21,7 @@ class _AddExpense extends State<AddExpense> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Cash Entry'),
+        title: Text(_isCashIn ? "Add Cash In Entry" : "Add Cash Out Entry"),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -31,19 +32,31 @@ class _AddExpense extends State<AddExpense> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Cash In'),
+                    onPressed: () {
+                      setState(() {
+                        _isCashIn = true;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                            borderRadius: BorderRadius.circular(20)),
+                        backgroundColor: !_isCashIn ? Colors.grey : null),
+                    child: const Text('Cash In'),
                   ),
                   const SizedBox(width: 6),
                   ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Cash Out'),
+                    onPressed: () {
+                      setState(() {
+                        _isCashIn = false;
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
+                            borderRadius: BorderRadius.circular(20)),
+                        backgroundColor: !_isCashIn
+                            ? Theme.of(context).colorScheme.error
+                            : Colors.grey),
+                    child: const Text('Cash Out'),
                   ),
                 ],
               ),
@@ -73,7 +86,7 @@ class _AddExpense extends State<AddExpense> {
                 child: Column(
                   children: [
                     TextFormField(
-                      // autofocus: true,
+                      autofocus: true,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -121,7 +134,7 @@ class _AddExpense extends State<AddExpense> {
       ),
       bottomSheet: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         decoration: const BoxDecoration(
           shape: BoxShape.rectangle,
           gradient: LinearGradient(
@@ -141,7 +154,11 @@ class _AddExpense extends State<AddExpense> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50, vertical: 18),
                     textStyle: const TextStyle(fontWeight: FontWeight.bold)),
-                onPressed: () {},
+                onPressed: () {
+                  if (_formkey.currentState!.validate()) {
+                    print(_amount.toString());
+                  }
+                },
                 child: const Text("SAVE & ADD NEW")),
             const SizedBox(width: 14),
             ElevatedButton(
@@ -151,7 +168,9 @@ class _AddExpense extends State<AddExpense> {
                   textStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  if (_formkey.currentState!.validate()) {
+                    Navigator.of(context).pop();
+                  }
                 },
                 child: const Text("SAVE"))
           ],
