@@ -16,12 +16,4 @@ final dummyExpenses = [
       time: DateTime.now(),
       amount: 35.23,
       remarks: 'Tissue'),
-  Expense(
-      date: DateTime.now(), time: DateTime.now(), amount: 35, remarks: 'Rice'),
-  Expense(
-      date: DateTime.now(), time: DateTime.now(), amount: 35, remarks: 'Rice'),
-  Expense(
-      date: DateTime.now(), time: DateTime.now(), amount: 35, remarks: 'Rice'),
-  Expense(
-      date: DateTime.now(), time: DateTime.now(), amount: 35, remarks: 'Rice'),
 ];

@@ -1,8 +1,10 @@
+import 'package:daily_expense/data/dummy.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_expense/models/expense.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({super.key});
+  const AddExpense({super.key, required this.inOrOut});
+  final String inOrOut;
 
   @override
   State<AddExpense> createState() {
@@ -12,11 +14,37 @@ class AddExpense extends StatefulWidget {
 
 class _AddExpense extends State<AddExpense> {
   bool _isCashIn = true;
-  var _amount = "";
+  var _amount = 0;
   var _remarks = "";
   DateTime? _selectedDate = DateTime.now();
   DateTime? _selectedTime = DateTime.now();
   final _formkey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.inOrOut == "in") {
+      _isCashIn = true;
+    }
+    if (widget.inOrOut == "out") {
+      _isCashIn = false;
+    }
+  }
+
+  //Add Expense Method
+  void _addExpense() {
+    if (_formkey.currentState!.validate()) {
+        dummyExpenses.add(
+          Expense(
+            date: _selectedDate!,
+            time: _selectedTime!,
+            amount: _amount,
+            remarks: _remarks,
+          ),
+        );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,7 +130,7 @@ class _AddExpense extends State<AddExpense> {
                         return null;
                       },
                       onSaved: (value) {
-                        _amount = value!;
+                        _amount = int.parse(value!);
                       },
                     ),
                     const SizedBox(height: 24),
@@ -155,9 +183,7 @@ class _AddExpense extends State<AddExpense> {
                         horizontal: 50, vertical: 18),
                     textStyle: const TextStyle(fontWeight: FontWeight.bold)),
                 onPressed: () {
-                  if (_formkey.currentState!.validate()) {
-                    print(_amount.toString());
-                  }
+                  _addExpense();
                 },
                 child: const Text("SAVE & ADD NEW")),
             const SizedBox(width: 14),
@@ -168,9 +194,8 @@ class _AddExpense extends State<AddExpense> {
                   textStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
-                  if (_formkey.currentState!.validate()) {
-                    Navigator.of(context).pop();
-                  }
+                  _addExpense();
+                  Navigator.of(context).pop();
                 },
                 child: const Text("SAVE"))
           ],

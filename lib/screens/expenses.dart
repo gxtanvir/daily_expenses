@@ -109,8 +109,10 @@ class ExpensesScreen extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
               ),
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (ctx) => AddExpense()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => AddExpense(
+                          inOrOut: "in",
+                        )));
               },
               icon: const Icon(Icons.add),
               label: const Text('Cash In'),
@@ -122,8 +124,10 @@ class ExpensesScreen extends StatelessWidget {
                 backgroundColor: Theme.of(context).colorScheme.error,
               ),
               onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (ctx) => AddExpense()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (ctx) => AddExpense(
+                          inOrOut: "out",
+                        )));
               },
               icon: const Icon(Icons.delete),
               label: const Text('Cash Out'),
