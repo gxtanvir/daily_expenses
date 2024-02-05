@@ -30,35 +30,35 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Khoroch Shomogro',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData().copyWith(
-          useMaterial3: false,
-          colorScheme: kColorScheme,
-          appBarTheme: AppBarTheme(
-            backgroundColor: kColorScheme.secondaryContainer,
-            titleTextStyle: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: kColorScheme.onPrimaryContainer),
-          ),
+      title: 'Khoroch Shomogro',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData().copyWith(
+        useMaterial3: false,
+        colorScheme: kColorScheme,
+        appBarTheme: AppBarTheme(
+          backgroundColor: kColorScheme.secondaryContainer,
+          titleTextStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: kColorScheme.onPrimaryContainer),
         ),
-        home: ExpensesScreen(book: Book(title: "February 2")),
-        // StreamBuilder(
-        //     stream: FirebaseAuth.instance.userChanges(),
-        //     builder: (ctx, snapshot) {
-        //       if (snapshot.connectionState == ConnectionState.waiting) {
-        //         return const Center(
-        //           child: CircularProgressIndicator(),
-        //         );
-        //       }
+      ),
+      home: ExpensesScreen(book: Book(title: "February 2")),
+      // StreamBuilder(
+      //     stream: FirebaseAuth.instance.userChanges(),
+      //     builder: (ctx, snapshot) {
+      //       if (snapshot.connectionState == ConnectionState.waiting) {
+      //         return const Center(
+      //           child: CircularProgressIndicator(),
+      //         );
+      //       }
 
-        //       if (snapshot.hasData) {
-        //         return const HomeScreen();
-        //       }
+      //       if (snapshot.hasData) {
+      //         return const HomeScreen();
+      //       }
 
-        //       return const AuthScreen();
-        //     }),
-            );
+      //       return const AuthScreen();
+      //     }),
+    );
   }
 }

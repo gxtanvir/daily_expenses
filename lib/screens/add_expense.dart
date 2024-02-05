@@ -16,8 +16,8 @@ class _AddExpense extends State<AddExpense> {
   bool _isCashIn = true;
   var _amount = 0;
   var _remarks = "";
-  DateTime? _selectedDate = DateTime.now();
-  DateTime? _selectedTime = DateTime.now();
+  DateTime? _selectedDate;
+  TimeOfDay? _selectedTime;
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -31,17 +31,46 @@ class _AddExpense extends State<AddExpense> {
     }
   }
 
-  //Add Expense Method
+  // Date Picker
+  void _openDatePicker() async {
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month, now.day);
+    final lastDate = DateTime(now.year + 64);
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: now,
+      firstDate: firstDate,
+      lastDate: lastDate,
+    );
+
+    setState(() {
+      _selectedDate = pickedDate;
+    });
+  }
+
+  // Time Pciker
+  void _openTimePicker() async {
+    final pickedTime = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    );
+
+    setState(() {
+      _selectedTime = pickedTime;
+    });
+  }
+
+  // Add Expense Method
   void _addExpense() {
     if (_formkey.currentState!.validate()) {
-        dummyExpenses.add(
-          Expense(
-            date: _selectedDate!,
-            time: _selectedTime!,
-            amount: _amount,
-            remarks: _remarks,
-          ),
-        );
+      dummyExpenses.add(
+        Expense(
+          date: _selectedDate!,
+          time: _selectedTime!,
+          amount: _amount,
+          remarks: _remarks,
+        ),
+      );
     }
   }
 
@@ -93,18 +122,20 @@ class _AddExpense extends State<AddExpense> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: _openDatePicker,
                     icon: const Icon(Icons.calendar_month),
                     label: Text(
-                      dateFormatter.format(_selectedDate!),
+                      _selectedDate == null
+                          ? dateFormatter.format(DateTime.now())
+                          : dateFormatter.format(_selectedDate!),
                     ),
                   ),
                   TextButton.icon(
-                    onPressed: () {},
+                    onPressed: _openTimePicker,
                     icon: const Icon(Icons.history),
-                    label: Text(
-                      timeFormatter.format(_selectedTime!),
-                    ),
+                    label: Text(_selectedTime == null
+                        ? TimeOfDay.now().format(context)
+                        : _selectedTime!.format(context)),
                   ),
                 ],
               ),

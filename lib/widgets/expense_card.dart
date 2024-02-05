@@ -1,4 +1,5 @@
 import 'package:daily_expense/models/expense.dart';
+import 'package:daily_expense/widgets/datetime.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseCard extends StatelessWidget {
@@ -40,11 +41,11 @@ class ExpenseCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                expense.date.day.toString(),
+                formatter.format(expense.date),
                 style:
                     const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
               ),
-              Text(expense.time.second.toString(),
+              Text(expense.time.format(context),
                   style: const TextStyle(
                       fontSize: 15, fontWeight: FontWeight.bold)),
             ],

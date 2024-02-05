@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-final formatter = DateFormat.yMMMMd();
+final formatter = DateFormat.yMd();
 
 class Time extends StatelessWidget {
   const Time({super.key, required this.dtime});
