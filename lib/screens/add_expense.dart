@@ -64,6 +64,7 @@ class _AddExpense extends ConsumerState<AddExpense> {
   // Add Expense Method
   void _addExpense() {
     if (_formkey.currentState!.validate()) {
+      _formkey.currentState!.save();
       ref.read(manageExpenseProvider.notifier).addExpense(Expense(
           date: _selectedDate,
           time: _selectedTime,
