@@ -1,16 +1,18 @@
-import 'package:daily_expense/data/dummy.dart';
 import 'package:daily_expense/models/book.dart';
 import 'package:daily_expense/screens/add_expense.dart';
 import 'package:daily_expense/widgets/expense_card.dart';
 import 'package:daily_expense/widgets/expense_summary.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:daily_expense/providers/manage_expense_provider.dart';
 
-class ExpensesScreen extends StatelessWidget {
+class ExpensesScreen extends ConsumerWidget {
   const ExpensesScreen({super.key, required this.book});
   final Book book;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final expenses = ref.watch(manageExpenseProvider);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 236, 236, 235),
       appBar: AppBar(
@@ -64,7 +66,7 @@ class ExpensesScreen extends StatelessWidget {
                     endIndent: 10,
                   )),
                   Text(
-                    'Showing ${dummyExpenses.length} entries',
+                    'Showing ${expenses.length} entries',
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const Expanded(
@@ -77,9 +79,9 @@ class ExpensesScreen extends StatelessWidget {
             const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
-                itemCount: dummyExpenses.length,
+                itemCount: expenses.length,
                 itemBuilder: (context, index) =>
-                    ExpenseCard(expense: dummyExpenses[index]),
+                    ExpenseCard(expense: expenses[index]),
               ),
             ),
           ],

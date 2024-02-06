@@ -1,7 +1,7 @@
 import 'package:daily_expense/models/expense.dart';
 import 'package:flutter/material.dart';
 
-final dummyExpenses = [
+final expenses = [
   Expense(
       date: DateTime.now(),
       time: TimeOfDay.now(),

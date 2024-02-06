@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 final dateFormatter = DateFormat.yMd();
 final timeFormatter = DateFormat.jm();
-var uid = Uuid();
+var uid = const Uuid();
 
 class Expense {
   Expense({

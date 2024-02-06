@@ -1,23 +1,24 @@
-import 'package:daily_expense/data/dummy.dart';
+import 'package:daily_expense/providers/manage_expense_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_expense/models/expense.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AddExpense extends StatefulWidget {
+class AddExpense extends ConsumerStatefulWidget {
   const AddExpense({super.key, required this.inOrOut});
   final String inOrOut;
 
   @override
-  State<AddExpense> createState() {
+  ConsumerState<AddExpense> createState() {
     return _AddExpense();
   }
 }
 
-class _AddExpense extends State<AddExpense> {
+class _AddExpense extends ConsumerState<AddExpense> {
   bool _isCashIn = true;
   var _amount = 0;
   var _remarks = "";
-  DateTime? _selectedDate;
-  TimeOfDay? _selectedTime;
+  DateTime _selectedDate = DateTime.now();
+  TimeOfDay _selectedTime = TimeOfDay.now();
   final _formkey = GlobalKey<FormState>();
 
   @override
@@ -44,7 +45,7 @@ class _AddExpense extends State<AddExpense> {
     );
 
     setState(() {
-      _selectedDate = pickedDate;
+      _selectedDate = pickedDate!;
     });
   }
 
@@ -56,21 +57,18 @@ class _AddExpense extends State<AddExpense> {
     );
 
     setState(() {
-      _selectedTime = pickedTime;
+      _selectedTime = pickedTime!;
     });
   }
 
   // Add Expense Method
   void _addExpense() {
     if (_formkey.currentState!.validate()) {
-      dummyExpenses.add(
-        Expense(
-          date: _selectedDate!,
-          time: _selectedTime!,
+      ref.read(manageExpenseProvider.notifier).addExpense(Expense(
+          date: _selectedDate,
+          time: _selectedTime,
           amount: _amount,
-          remarks: _remarks,
-        ),
-      );
+          remarks: _remarks));
     }
   }
 
@@ -125,17 +123,13 @@ class _AddExpense extends State<AddExpense> {
                     onPressed: _openDatePicker,
                     icon: const Icon(Icons.calendar_month),
                     label: Text(
-                      _selectedDate == null
-                          ? dateFormatter.format(DateTime.now())
-                          : dateFormatter.format(_selectedDate!),
+                      dateFormatter.format(_selectedDate),
                     ),
                   ),
                   TextButton.icon(
                     onPressed: _openTimePicker,
                     icon: const Icon(Icons.history),
-                    label: Text(_selectedTime == null
-                        ? TimeOfDay.now().format(context)
-                        : _selectedTime!.format(context)),
+                    label: Text(_selectedTime.format(context)),
                   ),
                 ],
               ),
@@ -162,6 +156,7 @@ class _AddExpense extends State<AddExpense> {
                       },
                       onSaved: (value) {
                         _amount = int.parse(value!);
+                        print(_amount);
                       },
                     ),
                     const SizedBox(height: 24),
@@ -226,7 +221,9 @@ class _AddExpense extends State<AddExpense> {
                 ),
                 onPressed: () {
                   _addExpense();
-                  Navigator.of(context).pop();
+                  if (_formkey.currentState!.validate()) {
+                    Navigator.of(context).pop();
+                  }
                 },
                 child: const Text("SAVE"))
           ],
