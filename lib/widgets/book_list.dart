@@ -87,9 +87,9 @@ class BookList extends ConsumerWidget {
                         ),
                         title: Text(books[index].title),
                         subtitle: Time(dtime: books[index].dateTime),
-                        trailing: const Text(
-                          '478',
-                          style: TextStyle(
+                        trailing: Text(
+                          books[index].balance.toString(),
+                          style: const TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         onTap: () {

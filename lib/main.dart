@@ -43,22 +43,22 @@ class MyApp extends StatelessWidget {
               color: kColorScheme.onPrimaryContainer),
         ),
       ),
-      home: ExpensesScreen(book: Book(title: "February 2")),
-      // StreamBuilder(
-      //     stream: FirebaseAuth.instance.userChanges(),
-      //     builder: (ctx, snapshot) {
-      //       if (snapshot.connectionState == ConnectionState.waiting) {
-      //         return const Center(
-      //           child: CircularProgressIndicator(),
-      //         );
-      //       }
+      home: //ExpensesScreen(book: Book(title: "February 2")),
+          StreamBuilder(
+              stream: FirebaseAuth.instance.userChanges(),
+              builder: (ctx, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
 
-      //       if (snapshot.hasData) {
-      //         return const HomeScreen();
-      //       }
+                if (snapshot.hasData) {
+                  return const HomeScreen();
+                }
 
-      //       return const AuthScreen();
-      //     }),
+                return const AuthScreen();
+              }),
     );
   }
 }
