@@ -1,4 +1,5 @@
 import 'package:daily_expense/models/book.dart';
+import 'package:daily_expense/screens/expenses.dart';
 import 'package:daily_expense/widgets/datetime.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -104,11 +105,19 @@ class _SearchBookState extends ConsumerState<SearchBook> {
                               ),
                               title: Text(_booksList[index].title),
                               subtitle: Time(dtime: _booksList[index].dateTime),
-                              trailing: const Text(
-                                '478',
+                              trailing: Text(
+                                _booksList[index].balance.toString(),
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) =>
+                                        ExpensesScreen(book: _booksList[index]),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         );
