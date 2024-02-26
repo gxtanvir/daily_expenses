@@ -1,11 +1,13 @@
+import 'package:daily_expense/models/book.dart';
 import 'package:daily_expense/providers/manage_expense_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:daily_expense/models/expense.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddExpense extends ConsumerStatefulWidget {
-  const AddExpense({super.key, required this.inOrOut});
+  const AddExpense({super.key, required this.inOrOut, required this.book});
   final String inOrOut;
+  final Book book;
 
   @override
   ConsumerState<AddExpense> createState() {
@@ -31,6 +33,7 @@ class _AddExpense extends ConsumerState<AddExpense> {
       _isCashIn = false;
     }
   }
+  
 
   // Date Picker
   void _openDatePicker() async {
@@ -69,7 +72,9 @@ class _AddExpense extends ConsumerState<AddExpense> {
           date: _selectedDate,
           time: _selectedTime,
           amount: _amount,
-          remarks: _remarks));
+          remarks: _remarks,
+          bookId: widget.book.id,
+          isCashIn: _isCashIn ? true : false));
     }
   }
 
@@ -157,7 +162,6 @@ class _AddExpense extends ConsumerState<AddExpense> {
                       },
                       onSaved: (value) {
                         _amount = int.parse(value!);
-                        print(_amount);
                       },
                     ),
                     const SizedBox(height: 24),

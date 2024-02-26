@@ -12,11 +12,15 @@ class Expense {
     required this.time,
     required this.amount,
     required this.remarks,
+    required this.isCashIn,
     String? id,
+    required this.bookId,
   }) : id = id ?? uid.v4();
   final String id;
+  final String bookId;
   final DateTime date;
   final TimeOfDay time;
-  final num amount;
+  final int amount;
   final String remarks;
+  final bool isCashIn;
 }

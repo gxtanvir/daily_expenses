@@ -12,7 +12,10 @@ class ExpensesScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final expenses = ref.watch(manageExpenseProvider);
+    final expenses = ref
+        .watch(manageExpenseProvider)
+        .where((element) => element.bookId == book.id)
+        .toList();
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 236, 236, 235),
       appBar: AppBar(
@@ -56,7 +59,7 @@ class ExpensesScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            const summary(),
+            summary(expenses: expenses),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
@@ -114,6 +117,7 @@ class ExpensesScreen extends ConsumerWidget {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => AddExpense(
                           inOrOut: "in",
+                          book: book,
                         )));
               },
               icon: const Icon(Icons.add),
@@ -129,6 +133,7 @@ class ExpensesScreen extends ConsumerWidget {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => AddExpense(
                           inOrOut: "out",
+                          book: book,
                         )));
               },
               icon: const Icon(Icons.delete),

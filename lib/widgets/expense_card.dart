@@ -31,8 +31,10 @@ class ExpenseCard extends StatelessWidget {
               ),
               Text(
                 expense.amount.toString(),
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: expense.isCashIn ? Colors.black : Colors.red),
               ),
             ],
           ),
