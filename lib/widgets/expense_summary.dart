@@ -10,7 +10,7 @@ class summary extends StatefulWidget {
 }
 
 class _summaryState extends State<summary> {
-  final netBalance = 0;
+  var netBalance = 0;
   var totalIn = 0;
   var totalOut = 0;
 
@@ -40,6 +40,10 @@ class _summaryState extends State<summary> {
     for (final o in outExpenses) {
       totalOut += o.amount;
     }
+
+    setState(() {
+      netBalance = totalIn - totalOut;
+    });
 
     return Container(
       margin: const EdgeInsets.all(20),

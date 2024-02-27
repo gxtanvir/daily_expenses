@@ -83,6 +83,7 @@ class ExpensesScreen extends ConsumerWidget {
             Expanded(
               child: ListView.builder(
                 itemCount: expenses.length,
+                reverse: true,
                 itemBuilder: (context, index) =>
                     ExpenseCard(expense: expenses[index]),
               ),
