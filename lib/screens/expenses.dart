@@ -59,7 +59,7 @@ class ExpensesScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            summary(expenses: expenses),
+            Summary(expenses: expenses),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(

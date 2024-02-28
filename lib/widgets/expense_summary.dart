@@ -1,23 +1,18 @@
 import 'package:daily_expense/models/expense.dart';
 import 'package:flutter/material.dart';
 
-class summary extends StatefulWidget {
-  const summary({super.key, required this.expenses});
+class Summary extends StatefulWidget {
+  const Summary({super.key, required this.expenses});
   final List<Expense> expenses;
 
   @override
-  State<summary> createState() => _summaryState();
+  State<Summary> createState() => _SummaryState();
 }
 
-class _summaryState extends State<summary> {
+class _SummaryState extends State<Summary> {
   var netBalance = 0;
   var totalIn = 0;
   var totalOut = 0;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +39,10 @@ class _summaryState extends State<summary> {
     setState(() {
       netBalance = totalIn - totalOut;
     });
+
+    void onBalance(int b) {
+      b = netBalance;
+    }
 
     return Container(
       margin: const EdgeInsets.all(20),

@@ -105,9 +105,9 @@ class _SearchBookState extends ConsumerState<SearchBook> {
                               ),
                               title: Text(_booksList[index].title),
                               subtitle: Time(dtime: _booksList[index].dateTime),
-                              trailing: Text(
-                                _booksList[index].balance.toString(),
-                                style: TextStyle(
+                              trailing: const Text(
+                                'Balance',
+                                style:  TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {

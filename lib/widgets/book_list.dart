@@ -34,8 +34,8 @@ class BookList extends ConsumerWidget {
                       )),
                   IconButton(
                       onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (ctx) => SearchBook()));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (ctx) => const SearchBook()));
                       },
                       icon: const Icon(
                         Icons.search,
@@ -87,9 +87,9 @@ class BookList extends ConsumerWidget {
                         ),
                         title: Text(books[index].title),
                         subtitle: Time(dtime: books[index].dateTime),
-                        trailing: Text(
-                          books[index].balance.toString(),
-                          style: const TextStyle(
+                        trailing: const Text(
+                          "Balance",
+                          style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
                         onTap: () {

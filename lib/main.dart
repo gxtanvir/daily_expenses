@@ -1,4 +1,3 @@
-import 'package:daily_expense/models/book.dart';
 import 'package:daily_expense/screens/auth.dart';
 import 'package:daily_expense/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:daily_expense/screens/expenses.dart';
 
 final kColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 13, 211, 119),
