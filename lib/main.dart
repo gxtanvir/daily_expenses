@@ -10,6 +10,11 @@ final kColorScheme = ColorScheme.fromSeed(
   seedColor: const Color.fromARGB(255, 13, 211, 119),
 );
 
+final kDarkColorScheme = ColorScheme.fromSeed(
+  brightness: Brightness.dark,
+  seedColor: const Color.fromARGB(255, 38, 62, 197),
+);
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -31,7 +36,7 @@ class MyApp extends StatelessWidget {
       title: 'Khoroch Shomogro',
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
-        useMaterial3: false,
+        // useMaterial3: false,
         colorScheme: kColorScheme,
         appBarTheme: AppBarTheme(
           backgroundColor: kColorScheme.secondaryContainer,
@@ -41,6 +46,10 @@ class MyApp extends StatelessWidget {
               color: kColorScheme.onPrimaryContainer),
         ),
       ),
+      darkTheme: ThemeData().copyWith(
+        colorScheme: kDarkColorScheme,
+      ),
+      themeMode: ThemeMode.dark,
       home: //ExpensesScreen(book: Book(title: "February 2")),
           StreamBuilder(
               stream: FirebaseAuth.instance.userChanges(),
