@@ -17,7 +17,6 @@ class ExpensesScreen extends ConsumerWidget {
         .where((element) => element.bookId == book.id)
         .toList();
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 236, 236, 235),
       appBar: AppBar(
         title: Text(
           book.title,
@@ -37,13 +36,15 @@ class ExpensesScreen extends ConsumerWidget {
                 width: double.infinity,
                 height: 50,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: const BoxDecoration(
-                    shape: BoxShape.rectangle, color: Colors.white),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Theme.of(context).colorScheme.secondaryContainer),
                 child: Row(
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.search,
                       size: 25,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                     const SizedBox(width: 10),
                     Text(
@@ -64,13 +65,14 @@ class ExpensesScreen extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                       child: Divider(
                     endIndent: 10,
+                    color: Theme.of(context).colorScheme.onSurface,
                   )),
                   Text(
                     'Showing ${expenses.length} entries',
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   const Expanded(
                       child: Divider(
@@ -94,18 +96,9 @@ class ExpensesScreen extends ConsumerWidget {
       bottomSheet: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(15),
-        decoration: const BoxDecoration(
-          shape: BoxShape.rectangle,
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(64, 202, 212, 206),
-              Color.fromARGB(248, 255, 255, 255),
-              Color.fromARGB(255, 255, 255, 255),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Theme.of(context).colorScheme.shadow),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

@@ -35,8 +35,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Khoroch Shomogro',
       debugShowCheckedModeBanner: false,
+      darkTheme: ThemeData().copyWith(
+        colorScheme: kDarkColorScheme,
+        useMaterial3: true,
+        scaffoldBackgroundColor: kDarkColorScheme.surface,
+        appBarTheme: const AppBarTheme().copyWith(
+          titleTextStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: kColorScheme.surface),
+        ),
+        textTheme: const TextTheme().copyWith(
+          bodyLarge: TextStyle(
+            color: kDarkColorScheme.onSurface,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       theme: ThemeData().copyWith(
-        // useMaterial3: false,
+        useMaterial3: false,
         colorScheme: kColorScheme,
         appBarTheme: AppBarTheme(
           backgroundColor: kColorScheme.secondaryContainer,
@@ -45,27 +62,29 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: kColorScheme.onPrimaryContainer),
         ),
-      ),
-      darkTheme: ThemeData().copyWith(
-        colorScheme: kDarkColorScheme,
+        // textTheme: TextTheme(
+        //   bodyLarge: TextStyle(
+        //     color: Colors.black,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
       ),
       themeMode: ThemeMode.dark,
-      home: //ExpensesScreen(book: Book(title: "February 2")),
-          StreamBuilder(
-              stream: FirebaseAuth.instance.userChanges(),
-              builder: (ctx, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+      home: StreamBuilder(
+          stream: FirebaseAuth.instance.userChanges(),
+          builder: (ctx, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
 
-                if (snapshot.hasData) {
-                  return const HomeScreen();
-                }
+            if (snapshot.hasData) {
+              return const HomeScreen();
+            }
 
-                return const AuthScreen();
-              }),
+            return const AuthScreen();
+          }),
     );
   }
 }

@@ -39,7 +39,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       appBar: AppBar(
         leading: Icon(
           Icons.account_balance_wallet_outlined,
-          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          color: Theme.of(context).colorScheme.primary,
         ),
         title: const Text(
           'Khoroch Shomogro',
@@ -64,7 +64,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             builder: (ctx) {
               return const NewExpense();
             },
-            backgroundColor: Theme.of(context).colorScheme.surface,
+            backgroundColor: Theme.of(context).colorScheme.surfaceTint,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             useSafeArea: true,

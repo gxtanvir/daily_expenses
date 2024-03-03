@@ -52,6 +52,7 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Theme.of(context).colorScheme.background,
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       width: double.infinity,
@@ -64,14 +65,17 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.cancel_rounded,
                     size: 25,
+                    color: Theme.of(context).colorScheme.onBackground,
                   )),
               const SizedBox(width: 10),
-              const Text(
+              Text(
                 'Add New Book',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onBackground),
               )
             ],
           ),

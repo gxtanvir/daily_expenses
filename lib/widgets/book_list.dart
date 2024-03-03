@@ -20,26 +20,31 @@ class BookList extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 'Your Books',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface),
               ),
               Row(
                 children: [
                   IconButton(
                       onPressed: () {},
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.sort,
                         size: 35,
+                        color: Theme.of(context).colorScheme.onSurface,
                       )),
                   IconButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (ctx) => const SearchBook()));
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.search,
                         size: 35,
+                        color: Theme.of(context).colorScheme.onSurface,
                       )),
                 ],
               )

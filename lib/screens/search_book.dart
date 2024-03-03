@@ -45,8 +45,11 @@ class _SearchBookState extends ConsumerState<SearchBook> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
-              decoration: const InputDecoration(
-                  hintText: 'Search By Book Name', border: InputBorder.none),
+              decoration: InputDecoration(
+                  hintText: 'Search By Book Name',
+                  hintStyle:
+                      TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  border: InputBorder.none),
               autofocus: true,
               onChanged: searchBook,
             ),
@@ -107,7 +110,7 @@ class _SearchBookState extends ConsumerState<SearchBook> {
                               subtitle: Time(dtime: _booksList[index].dateTime),
                               trailing: const Text(
                                 'Balance',
-                                style:  TextStyle(
+                                style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.bold),
                               ),
                               onTap: () {

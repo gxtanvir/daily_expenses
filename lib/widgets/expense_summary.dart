@@ -49,7 +49,7 @@ class _SummaryState extends State<Summary> {
       padding: const EdgeInsets.all(15),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.secondaryContainer,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5)),
       child: Column(
@@ -67,9 +67,10 @@ class _SummaryState extends State<Summary> {
               ),
             ],
           ),
-          const Divider(
+          Divider(
             height: 20,
             thickness: 2,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -98,12 +99,13 @@ class _SummaryState extends State<Summary> {
               ),
             ],
           ),
-          const Divider(
+          Divider(
             height: 20,
             thickness: 2,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
           Text(
-            'Report',
+            'Expense Summary',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],
