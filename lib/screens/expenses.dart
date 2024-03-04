@@ -38,7 +38,7 @@ class ExpensesScreen extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
-                    color: Theme.of(context).colorScheme.secondaryContainer),
+                    color: Theme.of(context).colorScheme.outlineVariant),
                 child: Row(
                   children: [
                     Icon(
@@ -98,14 +98,16 @@ class ExpensesScreen extends ConsumerWidget {
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
             shape: BoxShape.rectangle,
-            color: Theme.of(context).colorScheme.shadow),
+            color: Theme.of(context).colorScheme.surfaceVariant),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
               ),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -120,8 +122,9 @@ class ExpensesScreen extends ConsumerWidget {
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                    const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
                 backgroundColor: Theme.of(context).colorScheme.error,
+                foregroundColor: Theme.of(context).colorScheme.onError,
               ),
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(

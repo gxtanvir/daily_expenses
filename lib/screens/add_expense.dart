@@ -33,7 +33,6 @@ class _AddExpense extends ConsumerState<AddExpense> {
       _isCashIn = false;
     }
   }
-  
 
   // Date Picker
   void _openDatePicker() async {
@@ -82,7 +81,13 @@ class _AddExpense extends ConsumerState<AddExpense> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_isCashIn ? "Add Cash In Entry" : "Add Cash Out Entry"),
+        title: Text(
+          _isCashIn ? "Add Cash In Entry" : "Add Cash Out Entry",
+          style: TextStyle(
+              color: _isCashIn
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.error),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -101,7 +106,11 @@ class _AddExpense extends ConsumerState<AddExpense> {
                     style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20)),
-                        backgroundColor: !_isCashIn ? Colors.grey : null),
+                        backgroundColor: !_isCashIn
+                            ? Colors.grey
+                            : Theme.of(context).colorScheme.primary,
+                        foregroundColor:
+                            Theme.of(context).colorScheme.onPrimary),
                     child: const Text('Cash In'),
                   ),
                   const SizedBox(width: 6),
@@ -116,7 +125,8 @@ class _AddExpense extends ConsumerState<AddExpense> {
                             borderRadius: BorderRadius.circular(20)),
                         backgroundColor: !_isCashIn
                             ? Theme.of(context).colorScheme.error
-                            : Colors.grey),
+                            : Colors.grey,
+                        foregroundColor: Theme.of(context).colorScheme.onError),
                     child: const Text('Cash Out'),
                   ),
                 ],
@@ -170,6 +180,9 @@ class _AddExpense extends ConsumerState<AddExpense> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(2)),
                         hintText: "Remarks(Item Name/Quantity)",
+                        hintStyle: TextStyle(
+                            color:
+                                Theme.of(context).colorScheme.surfaceVariant),
                         labelText: "Remarks",
                       ),
                       validator: (value) {
@@ -193,19 +206,10 @@ class _AddExpense extends ConsumerState<AddExpense> {
       ),
       bottomSheet: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        decoration: const BoxDecoration(
-          shape: BoxShape.rectangle,
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(64, 202, 212, 206),
-              Color.fromARGB(248, 255, 255, 255),
-              Color.fromARGB(255, 255, 255, 255),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Theme.of(context).colorScheme.surfaceVariant),
         child: Row(
           children: [
             OutlinedButton(

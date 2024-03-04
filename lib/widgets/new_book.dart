@@ -28,8 +28,10 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
     if (_enteredBookName.trim().isEmpty) {
       showDialog(
         context: context,
+        useSafeArea: true,
         barrierDismissible: false,
         builder: (ctx) => AlertDialog(
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: const Text('Invalid Data'),
           content: const Text('Please enter a valid Book Name.'),
           actions: [
@@ -76,7 +78,7 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.onBackground),
-              )
+              ),
             ],
           ),
           const Divider(),
@@ -107,6 +109,9 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: TextButton.icon(
+                    style: TextButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).colorScheme.secondaryContainer),
                     icon: const Icon(
                       Icons.add,
                       size: 25,

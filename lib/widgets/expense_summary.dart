@@ -49,7 +49,7 @@ class _SummaryState extends State<Summary> {
       padding: const EdgeInsets.all(15),
       width: double.infinity,
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondaryContainer,
+          color: Theme.of(context).colorScheme.outlineVariant,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(5)),
       child: Column(

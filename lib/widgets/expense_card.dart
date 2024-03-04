@@ -12,9 +12,9 @@ class ExpenseCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.outlineVariant,
+        borderRadius: const BorderRadius.all(
           Radius.circular(6),
         ),
       ),
@@ -34,7 +34,9 @@ class ExpenseCard extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: expense.isCashIn ? Colors.black : Colors.red),
+                    color: expense.isCashIn
+                        ? Theme.of(context).colorScheme.onBackground
+                        : Theme.of(context).colorScheme.error),
               ),
             ],
           ),

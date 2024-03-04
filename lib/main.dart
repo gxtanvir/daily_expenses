@@ -35,15 +35,41 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Khoroch Shomogro',
       debugShowCheckedModeBanner: false,
-      darkTheme: ThemeData().copyWith(
-        colorScheme: kDarkColorScheme,
-        useMaterial3: true,
-        scaffoldBackgroundColor: kDarkColorScheme.surface,
-        appBarTheme: const AppBarTheme().copyWith(
+      themeMode: ThemeMode.system,
+      theme: ThemeData().copyWith(
+        useMaterial3: false,
+        colorScheme: kColorScheme,
+        scaffoldBackgroundColor: kColorScheme.surface,
+        appBarTheme: AppBarTheme(
+          backgroundColor: kColorScheme.secondaryContainer,
           titleTextStyle: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: kColorScheme.surface),
+              color: kColorScheme.onPrimaryContainer),
+        ),
+        cardTheme: const CardTheme().copyWith(
+          color: kColorScheme.surfaceVariant,
+        ),
+        // textTheme: const TextTheme().copyWith(
+        //   bodyLarge: TextStyle(
+        //     color: kColorScheme.onSurface,
+        //     fontWeight: FontWeight.bold,
+        //   ),
+        // ),
+      ),
+      darkTheme: ThemeData().copyWith(
+        useMaterial3: false,
+        colorScheme: kDarkColorScheme,
+        scaffoldBackgroundColor: kDarkColorScheme.surface,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: kDarkColorScheme.secondaryContainer,
+          titleTextStyle: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: kDarkColorScheme.onSecondaryContainer),
+        ),
+        cardTheme: const CardTheme().copyWith(
+          color: kDarkColorScheme.surfaceVariant,
         ),
         textTheme: const TextTheme().copyWith(
           bodyLarge: TextStyle(
@@ -52,24 +78,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      theme: ThemeData().copyWith(
-        useMaterial3: false,
-        colorScheme: kColorScheme,
-        appBarTheme: AppBarTheme(
-          backgroundColor: kColorScheme.secondaryContainer,
-          titleTextStyle: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: kColorScheme.onPrimaryContainer),
-        ),
-        // textTheme: TextTheme(
-        //   bodyLarge: TextStyle(
-        //     color: Colors.black,
-        //     fontWeight: FontWeight.bold,
-        //   ),
-        // ),
-      ),
-      themeMode: ThemeMode.dark,
       home: StreamBuilder(
           stream: FirebaseAuth.instance.userChanges(),
           builder: (ctx, snapshot) {
