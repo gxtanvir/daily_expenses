@@ -92,10 +92,9 @@ class BookList extends ConsumerWidget {
                         ),
                         title: Text(books[index].title),
                         subtitle: Time(dtime: books[index].dateTime),
-                        trailing: const Text(
-                          "Balance",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.bold),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.more_vert),
+                          onPressed: () {},
                         ),
                         onTap: () {
                           Navigator.of(context).push(

@@ -144,7 +144,7 @@ class _AddExpense extends ConsumerState<AddExpense> {
                   ),
                   TextButton.icon(
                     onPressed: _openTimePicker,
-                    icon: const Icon(Icons.history),
+                    icon: const Icon(Icons.access_time),
                     label: Text(_selectedTime.format(context)),
                   ),
                 ],

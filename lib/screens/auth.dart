@@ -75,7 +75,6 @@ class _AuthSrceenState extends State<AuthScreen> {
         child: Center(
           child: SingleChildScrollView(
             child: Column(
-              
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -89,7 +88,11 @@ class _AuthSrceenState extends State<AuthScreen> {
                     color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
-                Card(
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                  ),
                   margin: const EdgeInsets.all(20),
                   child: SingleChildScrollView(
                     padding: const EdgeInsets.all(20),
