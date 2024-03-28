@@ -25,72 +25,81 @@ class ExpensesScreen extends ConsumerWidget {
       ),
       body: SizedBox(
         width: double.infinity,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 4,
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                width: double.infinity,
-                height: 50,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Theme.of(context).colorScheme.outlineVariant),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.search,
-                      size: 25,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Search your expenses',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onBackground
-                              .withOpacity(.3)),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Summary(expenses: expenses),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Row(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
-                      child: Divider(
-                    endIndent: 10,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  )),
-                  Text(
-                    'Showing ${expenses.length} entries',
-                    style: Theme.of(context).textTheme.bodyLarge,
+                  const SizedBox(
+                    height: 4,
                   ),
-                  const Expanded(
-                      child: Divider(
-                    indent: 10,
-                  )),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      width: double.infinity,
+                      height: 50,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: Theme.of(context).colorScheme.outlineVariant),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.search,
+                            size: 25,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            'Search your expenses',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onBackground
+                                    .withOpacity(.3)),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Summary(expenses: expenses),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        Expanded(
+                            child: Divider(
+                          endIndent: 10,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        )),
+                        Text(
+                          'Showing ${expenses.length} entries',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const Expanded(
+                            child: Divider(
+                          indent: 10,
+                        )),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: expenses.length,
+                      reverse: true,
+                      itemBuilder: (context, index) =>
+                          ExpenseCard(expense: expenses[index]),
+                    ),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: expenses.length,
-                reverse: true,
-                itemBuilder: (context, index) =>
-                    ExpenseCard(expense: expenses[index]),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
       bottomSheet: Container(
