@@ -23,84 +23,85 @@ class ExpensesScreen extends ConsumerWidget {
         ),
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       ),
-      body: SizedBox(
-        width: double.infinity,
-        child: Center(
-          child: SingleChildScrollView(
-            child: Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      width: double.infinity,
-                      height: 50,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          color: Theme.of(context).colorScheme.outlineVariant),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.search,
-                            size: 25,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            'Search your expenses',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onBackground
-                                    .withOpacity(.3)),
-                          )
-                        ],
-                      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: GestureDetector(
+              onTap: () {},
+              child: Container(
+                width: double.infinity,
+                height: 50,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Theme.of(context).colorScheme.outlineVariant),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.search,
+                      size: 25,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
-                  ),
-                  Summary(expenses: expenses),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: Divider(
-                          endIndent: 10,
-                          color: Theme.of(context).colorScheme.onSurface,
-                        )),
-                        Text(
-                          'Showing ${expenses.length} entries',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                        const Expanded(
-                            child: Divider(
-                          indent: 10,
-                        )),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: expenses.length,
-                      reverse: true,
-                      itemBuilder: (context, index) =>
-                          ExpenseCard(expense: expenses[index]),
-                    ),
-                  ),
-                ],
+                    const SizedBox(width: 10),
+                    Text(
+                      'Search your expenses',
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onBackground
+                              .withOpacity(.3)),
+                    )
+                  ],
+                ),
               ),
             ),
           ),
-        ),
+          SliverToBoxAdapter(
+            child: Summary(expenses: expenses),
+          ),
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Divider(
+                        endIndent: 10,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      )),
+                      Text(
+                        'Showing ${expenses.length} entries',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      Expanded(
+                          child: Divider(
+                        indent: 10,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      )),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final reversedIndex = expenses.length - index - 1;
+                return ExpenseCard(
+                  expense: expenses[reversedIndex],
+                );
+              },
+              childCount: expenses.length,
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 250),
+          )
+        ],
       ),
       bottomSheet: Container(
         width: double.infinity,
