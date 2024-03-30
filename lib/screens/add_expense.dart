@@ -155,12 +155,18 @@ class _AddExpense extends ConsumerState<AddExpense> {
                 child: Column(
                   children: [
                     TextFormField(
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface),
                       autofocus: true,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(2)),
                         labelText: "Amount",
+                        labelStyle: TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer),
                       ),
                       validator: (value) {
                         if (value == null ||
@@ -176,14 +182,21 @@ class _AddExpense extends ConsumerState<AddExpense> {
                     ),
                     const SizedBox(height: 24),
                     TextFormField(
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(2)),
+                        labelText: "Remarks",
+                        labelStyle: TextStyle(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onSecondaryContainer),
                         hintText: "Remarks(Item Name/Quantity)",
                         hintStyle: TextStyle(
                             color:
                                 Theme.of(context).colorScheme.surfaceVariant),
-                        labelText: "Remarks",
+                        fillColor: Theme.of(context).colorScheme.onBackground,
                       ),
                       validator: (value) {
                         if (value == null ||
@@ -215,7 +228,7 @@ class _AddExpense extends ConsumerState<AddExpense> {
             OutlinedButton(
                 style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 50, vertical: 18),
+                        horizontal: 40, vertical: 18),
                     textStyle: const TextStyle(fontWeight: FontWeight.bold)),
                 onPressed: () {
                   _addExpense();
@@ -225,7 +238,7 @@ class _AddExpense extends ConsumerState<AddExpense> {
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 50, vertical: 18),
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 18),
                   textStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
