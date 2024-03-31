@@ -1,5 +1,6 @@
 import 'package:daily_expense/models/book.dart';
 import 'package:daily_expense/screens/add_expense.dart';
+import 'package:daily_expense/screens/expense_details.dart';
 import 'package:daily_expense/widgets/expense_card.dart';
 import 'package:daily_expense/widgets/expense_summary.dart';
 import 'package:flutter/material.dart';
@@ -91,8 +92,18 @@ class ExpensesScreen extends ConsumerWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final reversedIndex = expenses.length - index - 1;
-                return ExpenseCard(
-                  expense: expenses[reversedIndex],
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) =>
+                            Details(expense: expenses[reversedIndex]),
+                      ),
+                    );
+                  },
+                  child: ExpenseCard(
+                    expense: expenses[reversedIndex],
+                  ),
                 );
               },
               childCount: expenses.length,
