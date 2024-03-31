@@ -1,6 +1,7 @@
 import 'package:daily_expense/models/book.dart';
 import 'package:daily_expense/screens/add_expense.dart';
 import 'package:daily_expense/screens/expense_details.dart';
+import 'package:daily_expense/screens/search_expenses.dart';
 import 'package:daily_expense/widgets/expense_card.dart';
 import 'package:daily_expense/widgets/expense_summary.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,14 @@ class ExpensesScreen extends ConsumerWidget {
         slivers: [
           SliverToBoxAdapter(
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (ctx) => SearchExpense(book: book),
+                  ),
+                );
+              },
               child: Container(
                 width: double.infinity,
                 height: 50,
