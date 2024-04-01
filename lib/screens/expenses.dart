@@ -27,45 +27,46 @@ class ExpensesScreen extends ConsumerWidget {
       ),
       body: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (ctx) => SearchExpense(book: book),
-                  ),
-                );
-              },
-              child: Container(
-                width: double.infinity,
-                height: 50,
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    color: Theme.of(context).colorScheme.outlineVariant),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.search,
-                      size: 25,
-                      color: Theme.of(context).colorScheme.onSurface,
+          if (expenses.isNotEmpty)
+            SliverToBoxAdapter(
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) => SearchExpense(book: book),
                     ),
-                    const SizedBox(width: 10),
-                    Text(
-                      'Search your expenses',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onBackground
-                              .withOpacity(.3)),
-                    )
-                  ],
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: 50,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      color: Theme.of(context).colorScheme.outlineVariant),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.search,
+                        size: 25,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        'Search your expenses',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onBackground
+                                .withOpacity(.3)),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
           SliverToBoxAdapter(
             child: Summary(expenses: expenses),
           ),
