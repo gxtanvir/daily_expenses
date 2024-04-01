@@ -32,6 +32,7 @@ class Details extends StatelessWidget {
               // borderRadius: BorderRadius.circular(5),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,19 +40,45 @@ class Details extends StatelessWidget {
                     Text(
                       expense.isCashIn ? "Cash In" : "Cash Out",
                       style: TextStyle(
-                          color:
-                              Theme.of(context).colorScheme.onSurfaceVariant),
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          fontSize:
+                              Theme.of(context).textTheme.bodyLarge!.fontSize),
                     ),
-                    Row(
-                      children: [
-                        Text("On ${formater.format(expense.date)}, "),
-                        Text(
-                          expense.time.format(context),
-                        ),
-                      ],
-                    )
+                    Text(
+                      "On ${formater.format(expense.date)}, ${expense.time.format(context)}",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground),
+                    ),
                   ],
-                )
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  expense.amount.toString(),
+                  style: TextStyle(
+                      color: expense.isCashIn ? Colors.green : Colors.red,
+                      fontSize:
+                          Theme.of(context).textTheme.titleLarge!.fontSize,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                Divider(
+                  thickness: 1,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  expense.remarks,
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onBackground,
+                      fontSize:
+                          Theme.of(context).textTheme.titleMedium!.fontSize),
+                ),
+                const SizedBox(height: 10),
+                Divider(
+                  thickness: 1,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+                TextButton.icon(onPressed: (){}, icon: Icon(Icons.update), label: Text("Edit Entrys"))
               ],
             ),
           ),
