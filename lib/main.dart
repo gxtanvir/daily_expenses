@@ -80,23 +80,22 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home:
-          // ExpensesScreen(book: Book(title: "March-2024")),
-          StreamBuilder(
-              stream: FirebaseAuth.instance.userChanges(),
-              builder: (ctx, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+      home: ExpensesScreen(book: Book(title: "March-2024")),
+      // StreamBuilder(
+      //     stream: FirebaseAuth.instance.userChanges(),
+      //     builder: (ctx, snapshot) {
+      //       if (snapshot.connectionState == ConnectionState.waiting) {
+      //         return const Center(
+      //           child: CircularProgressIndicator(),
+      //         );
+      //       }
 
-                if (snapshot.hasData) {
-                  return const HomeScreen();
-                }
+      //       if (snapshot.hasData) {
+      //         return const HomeScreen();
+      //       }
 
-                return const AuthScreen();
-              }),
+      //       return const AuthScreen();
+      //     }),
     );
   }
 }

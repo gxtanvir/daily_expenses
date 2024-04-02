@@ -26,8 +26,10 @@ class ExpenseCard extends StatelessWidget {
             children: [
               Text(
                 expense.remarks,
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onBackground),
               ),
               Text(
                 expense.amount.toString(),
@@ -35,7 +37,7 @@ class ExpenseCard extends StatelessWidget {
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: expense.isCashIn
-                        ? Theme.of(context).colorScheme.onBackground
+                        ? Colors.green
                         : Theme.of(context).colorScheme.error),
               ),
             ],
@@ -46,12 +48,16 @@ class ExpenseCard extends StatelessWidget {
             children: [
               Text(
                 formatter.format(expense.date),
-                style:
-                    const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onBackground),
               ),
               Text(expense.time.format(context),
-                  style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onBackground)),
             ],
           )
         ],

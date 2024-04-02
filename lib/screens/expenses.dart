@@ -163,7 +163,7 @@ class ExpensesScreen extends ConsumerWidget {
                           book: book,
                         )));
               },
-              icon: const Icon(Icons.delete),
+              icon: const Icon(Icons.horizontal_rule),
               label: const Text('Cash Out'),
             ),
           ],

@@ -17,7 +17,7 @@ class Details extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            margin: const EdgeInsets.all(20),
+            margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
             padding: const EdgeInsets.all(15),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.outlineVariant,
@@ -26,7 +26,14 @@ class Details extends StatelessWidget {
                 top: BorderSide(
                   style: BorderStyle.solid,
                   width: 5,
-                  color: expense.isCashIn ? Colors.green : Colors.red,
+                  color: expense.isCashIn
+                      ? Colors.green
+                      : Theme.of(context).colorScheme.error,
+                ),
+                bottom: BorderSide(
+                  style: BorderStyle.solid,
+                  width: 1,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               // borderRadius: BorderRadius.circular(5),
@@ -55,7 +62,9 @@ class Details extends StatelessWidget {
                 Text(
                   expense.amount.toString(),
                   style: TextStyle(
-                      color: expense.isCashIn ? Colors.green : Colors.red,
+                      color: expense.isCashIn
+                          ? Colors.green
+                          : Theme.of(context).colorScheme.error,
                       fontSize:
                           Theme.of(context).textTheme.titleLarge!.fontSize,
                       fontWeight: FontWeight.bold),
@@ -73,15 +82,25 @@ class Details extends StatelessWidget {
                       fontSize:
                           Theme.of(context).textTheme.titleMedium!.fontSize),
                 ),
-                const SizedBox(height: 10),
-                Divider(
-                  thickness: 1,
-                  color: Theme.of(context).colorScheme.onSurface,
-                ),
-                TextButton.icon(onPressed: (){}, icon: Icon(Icons.update), label: Text("Edit Entrys"))
               ],
             ),
           ),
+          Container(
+            margin: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+            width: double.infinity,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.outlineVariant,
+              shape: BoxShape.rectangle,
+            ),
+            child: TextButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.create_outlined),
+                label: const Text(
+                  "EDIT ENTRY",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                )),
+          )
         ],
       ),
     );
