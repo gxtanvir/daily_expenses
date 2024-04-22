@@ -54,6 +54,7 @@ class _SearchExpenseState extends ConsumerState<SearchExpense> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: TextField(
+            style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             decoration: InputDecoration(
                 hintText: 'Search By Remarks',
                 hintStyle: TextStyle(
@@ -68,10 +69,16 @@ class _SearchExpenseState extends ConsumerState<SearchExpense> {
         ),
       ),
       body: _expenses.isEmpty
-          ? const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          ? Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Center(
-                child: Text("Sorry no expense found with this name"),
+                child: Text(
+                  "Sorry no expense found with this name",
+                  style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontSize:
+                          Theme.of(context).textTheme.titleMedium!.fontSize),
+                ),
               ),
             )
           : CustomScrollView(
