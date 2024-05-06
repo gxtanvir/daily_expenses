@@ -20,7 +20,7 @@ class Expense {
   final String bookId;
   final DateTime date;
   final TimeOfDay time;
-  final int amount;
+  final num amount;
   final String remarks;
   final bool isCashIn;
 }

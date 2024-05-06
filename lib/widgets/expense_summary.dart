@@ -10,9 +10,9 @@ class Summary extends StatefulWidget {
 }
 
 class _SummaryState extends State<Summary> {
-  var netBalance = 0;
-  var totalIn = 0;
-  var totalOut = 0;
+  var netBalance = 0.0;
+  var totalIn = 0.0;
+  var totalOut = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _SummaryState extends State<Summary> {
       netBalance = totalIn - totalOut;
     });
 
-    void onBalance(int b) {
+    void onBalance(double b) {
       b = netBalance;
     }
 
