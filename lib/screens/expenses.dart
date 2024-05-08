@@ -8,20 +8,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:daily_expense/providers/manage_expense_provider.dart';
 
-class ExpensesScreen extends ConsumerWidget {
+class ExpensesScreen extends ConsumerStatefulWidget {
   const ExpensesScreen({super.key, required this.book});
   final Book book;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ExpensesScreen> createState() {
+    return _ExpensesScreenState();
+  }
+}
+
+class _ExpensesScreenState extends ConsumerState<ExpensesScreen> {
+  late Future<void> _expenseFuture;
+  @override
+  void initState() {
+    super.initState();
+    _expenseFuture = ref.read(manageExpenseProvider.notifier).loadExpense();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final expenses = ref
         .watch(manageExpenseProvider)
-        .where((element) => element.bookId == book.id)
+        .where((element) => element.bookId == widget.book.id)
         .toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          book.title,
+          widget.book.title,
         ),
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
       ),
@@ -34,7 +48,7 @@ class ExpensesScreen extends ConsumerWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (ctx) => SearchExpense(book: book),
+                      builder: (ctx) => SearchExpense(book: widget.book),
                     ),
                   );
                 },
@@ -110,9 +124,15 @@ class ExpensesScreen extends ConsumerWidget {
                       ),
                     );
                   },
-                  child: ExpenseCard(
-                    expense: expenses[reversedIndex],
-                  ),
+                  child: FutureBuilder(
+                      future: _expenseFuture,
+                      builder: (context, snapshot) =>
+                          snapshot.connectionState == ConnectionState.waiting
+                              ? const Center(child: CircularProgressIndicator())
+                              : ExpenseCard(expense: expenses[reversedIndex])),
+                  // ExpenseCard(
+                  //   expense: expenses[reversedIndex],
+                  // ),
                 );
               },
               childCount: expenses.length,
@@ -143,7 +163,7 @@ class ExpensesScreen extends ConsumerWidget {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => AddExpense(
                           inOrOut: "in",
-                          book: book,
+                          book: widget.book,
                         )));
               },
               icon: const Icon(Icons.add),
@@ -160,7 +180,7 @@ class ExpensesScreen extends ConsumerWidget {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (ctx) => AddExpense(
                           inOrOut: "out",
-                          book: book,
+                          book: widget.book,
                         )));
               },
               icon: const Icon(Icons.horizontal_rule),

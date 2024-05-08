@@ -31,6 +31,7 @@ class AddBookNotifier extends StateNotifier<List<Book>> {
               dateTime: DateTime.parse(row['time'] as String),
             ))
         .toList();
+    print('Expense Loaded');
     state = books;
   }
 

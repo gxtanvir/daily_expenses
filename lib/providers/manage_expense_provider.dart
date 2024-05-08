@@ -29,12 +29,13 @@ class ManageExpenseNotifier extends StateNotifier<List<Expense>> {
         .map((row) => Expense(
             id: row['id'] as String,
             date: DateTime.parse(row['date'] as String),
-            time: TimeOfDay.fromDateTime(DateTime.parse(row['time'] as String)),
+            time: TimeOfDay(hour: hour, minute: minute), // Need to solve
             amount: row['amount'] as num,
             remarks: row['remarks'] as String,
             isCashIn: row['isCashIn'] as String == 'true' ? true : false,
             bookId: row['bookId'] as String))
         .toList();
+    print('Expense Loaded');
     state = expenses;
   }
 
@@ -50,6 +51,7 @@ class ManageExpenseNotifier extends StateNotifier<List<Expense>> {
       'remarks': expense.remarks,
       'isCashIn': expense.isCashIn.toString(),
     });
+    print('Expense Added!');
     state = [...state, expense];
   }
 }
