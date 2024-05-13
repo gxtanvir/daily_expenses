@@ -17,7 +17,7 @@ class AddExpense extends ConsumerStatefulWidget {
 
 class _AddExpense extends ConsumerState<AddExpense> {
   bool _isCashIn = true;
-  var _amount = 0.0;
+  num _amount = 0;
   var _remarks = "";
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _selectedTime = TimeOfDay.now();
@@ -177,7 +177,7 @@ class _AddExpense extends ConsumerState<AddExpense> {
                         return null;
                       },
                       onSaved: (value) {
-                        _amount = double.parse(value!);
+                        _amount = num.parse(value!);
                       },
                     ),
                     const SizedBox(height: 24),
