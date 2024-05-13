@@ -18,6 +18,19 @@ Future<Database> _getDatabase() async {
   return db;
 }
 
+// Function to convert String to TimeOfDay
+TimeOfDay stringToTimeOfDay(String timeString) {
+  // Extracting the hour and minute parts from the string
+  List<String> parts = timeString
+      .substring(timeString.indexOf('(') + 1, timeString.indexOf(')'))
+      .split(':');
+
+  int hour = int.parse(parts[0]);
+  int minute = int.parse(parts[1]);
+
+  return TimeOfDay(hour: hour, minute: minute);
+}
+
 class ManageExpenseNotifier extends StateNotifier<List<Expense>> {
   ManageExpenseNotifier() : super([]);
 
@@ -25,16 +38,18 @@ class ManageExpenseNotifier extends StateNotifier<List<Expense>> {
   Future<void> loadExpense() async {
     final db = await _getDatabase();
     final data = await db.query('expense_details');
-    final expenses = data
-        .map((row) => Expense(
-            id: row['id'] as String,
-            date: DateTime.parse(row['date'] as String),
-            time: TimeOfDay(hour: hour, minute: minute), // Need to solve
-            amount: row['amount'] as num,
-            remarks: row['remarks'] as String,
-            isCashIn: row['isCashIn'] as String == 'true' ? true : false,
-            bookId: row['bookId'] as String))
-        .toList();
+    final expenses = data.map((row) {
+      var timeString = row['time'] as String;
+      TimeOfDay time = stringToTimeOfDay(timeString);
+      return Expense(
+          id: row['id'] as String,
+          date: DateTime.parse(row['date'] as String),
+          time: time, // Need to solve
+          amount: row['amount'] as num,
+          remarks: row['remarks'] as String,
+          isCashIn: row['isCashIn'] as String == 'true' ? true : false,
+          bookId: row['bookId'] as String);
+    }).toList();
     print('Expense Loaded');
     state = expenses;
   }

@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Khoroch Shomogro',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: ThemeData().copyWith(
         useMaterial3: false,
         colorScheme: kColorScheme,
