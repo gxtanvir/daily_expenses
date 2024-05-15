@@ -102,8 +102,12 @@ class _AuthSrceenState extends State<AuthScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           TextFormField(
-                            decoration:
-                                const InputDecoration(labelText: 'Email'),
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
+                            decoration: const InputDecoration(
+                              labelText: 'Email',
+                            ),
                             autocorrect: false,
                             keyboardType: TextInputType.emailAddress,
                             enableSuggestions: true,
@@ -121,8 +125,13 @@ class _AuthSrceenState extends State<AuthScreen> {
                           ),
                           if (!_isLogin)
                             TextFormField(
-                              decoration:
-                                  const InputDecoration(labelText: 'Username'),
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
+                              decoration: const InputDecoration(
+                                labelText: 'Username',
+                              ),
                               autocorrect: false,
                               enableSuggestions: false,
                               validator: (value) {
@@ -138,8 +147,12 @@ class _AuthSrceenState extends State<AuthScreen> {
                               },
                             ),
                           TextFormField(
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
+                            decoration: const InputDecoration(
+                              labelText: 'Password',
+                            ),
                             obscureText: true,
                             validator: (text) {
                               if (text != null &&

@@ -54,6 +54,7 @@ class _SearchExpenseState extends ConsumerState<SearchExpense> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: TextField(
+            textCapitalization: TextCapitalization.sentences,
             style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
             decoration: InputDecoration(
                 hintText: 'Search By Remarks',

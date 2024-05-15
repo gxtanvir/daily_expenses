@@ -88,6 +88,7 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
               children: [
                 TextField(
                   autofocus: true,
+                  textCapitalization: TextCapitalization.sentences,
                   controller: _bookController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(

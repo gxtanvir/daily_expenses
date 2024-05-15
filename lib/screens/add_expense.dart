@@ -182,6 +182,7 @@ class _AddExpense extends ConsumerState<AddExpense> {
                     ),
                     const SizedBox(height: 24),
                     TextFormField(
+                      textCapitalization: TextCapitalization.sentences,
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.onSurface),
                       decoration: InputDecoration(

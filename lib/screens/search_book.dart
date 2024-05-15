@@ -45,6 +45,7 @@ class _SearchBookState extends ConsumerState<SearchBook> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: TextField(
+              textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
                   hintText: 'Search By Book Name',
                   hintStyle:
