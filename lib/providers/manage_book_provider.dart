@@ -31,7 +31,6 @@ class AddBookNotifier extends StateNotifier<List<Book>> {
               dateTime: DateTime.parse(row['time'] as String),
             ))
         .toList();
-    print('Expense Loaded');
     state = books;
   }
 
@@ -44,6 +43,15 @@ class AddBookNotifier extends StateNotifier<List<Book>> {
       'time': book.dateTime.toString(),
     });
     state = [...state, book];
+  }
+
+  // Update Book Name
+  void updateBook(Book book) async {
+    final db = await _getDatabase();
+    await db.update('expense_book', {'title': book.title},
+        where: 'id = ?', whereArgs: [book.id]);
+    print('Book Updated!');
+    // state = [...state];
   }
 
   // Delete Book

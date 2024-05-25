@@ -62,7 +62,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             isScrollControlled: true,
             context: context,
             builder: (ctx) {
-              return const NewExpense();
+              return const NewExpense(pageType: 'save',);
             },
             backgroundColor: Theme.of(context).colorScheme.surfaceTint,
             shape:

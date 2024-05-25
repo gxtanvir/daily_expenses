@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:daily_expense/providers/manage_book_provider.dart';
 
 class NewExpense extends ConsumerStatefulWidget {
-  const NewExpense({super.key});
+  const NewExpense({super.key, required this.pageType, this.book});
+  final String pageType;
+  final Book? book;
 
   @override
   ConsumerState<NewExpense> createState() {
@@ -21,11 +23,19 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
     super.dispose();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    if (widget.pageType == 'update') {
+      _bookController.text = widget.book!.title;
+    }
+  }
+
   // Add New Book
   void _addBook() {
-    final _enteredBookName = _bookController.text;
+    final enteredBookName = _bookController.text;
 
-    if (_enteredBookName.trim().isEmpty) {
+    if (enteredBookName.trim().isEmpty) {
       showDialog(
         context: context,
         useSafeArea: true,
@@ -45,16 +55,24 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
       );
       return;
     }
-    ref.read(manageBooksProvider.notifier).addBook(
-          Book(title: _enteredBookName),
-        );
+    if (widget.pageType == 'save') {
+      ref.read(manageBooksProvider.notifier).addBook(
+            Book(title: enteredBookName),
+          );
+    }
+    if (widget.pageType == 'update') {
+      ref
+          .watch(manageBooksProvider.notifier)
+          .updateBook(Book(title: enteredBookName));
+    }
+
     Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).colorScheme.background,
+      color: Theme.of(context).colorScheme.surface,
       padding:
           EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       width: double.infinity,
@@ -70,14 +88,14 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
                   icon: Icon(
                     Icons.cancel_rounded,
                     size: 25,
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onSurface,
                   )),
               const SizedBox(width: 10),
               Text(
-                'Add New Book',
+                widget.pageType == 'save' ? 'Add New Book' : "Update Book Name",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onBackground),
+                    color: Theme.of(context).colorScheme.onSurface),
               ),
             ],
           ),
@@ -118,9 +136,11 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
                       size: 25,
                     ),
                     onPressed: _addBook,
-                    label: const Text(
-                      'ADD NEW BOOK',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    label: Text(
+                      widget.pageType == 'update'
+                          ? 'Save Book Name'
+                          : 'ADD NEW BOOK',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 )
