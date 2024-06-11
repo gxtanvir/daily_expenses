@@ -51,7 +51,7 @@ class AddBookNotifier extends StateNotifier<List<Book>> {
     await db.update('expense_book', {'title': book.title},
         where: 'id = ?', whereArgs: [book.id]);
     print('Book Updated!');
-    // state = [...state];
+    state = state.map((b) => b.id == book.id ? book : b).toList();
   }
 
   // Delete Book

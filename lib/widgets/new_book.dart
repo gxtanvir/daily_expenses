@@ -55,15 +55,15 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
       );
       return;
     }
+    if (widget.pageType == 'update') {
+      ref
+          .read(manageBooksProvider.notifier)
+          .updateBook(Book(id: widget.book!.id, title: enteredBookName));
+    }
     if (widget.pageType == 'save') {
       ref.read(manageBooksProvider.notifier).addBook(
             Book(title: enteredBookName),
           );
-    }
-    if (widget.pageType == 'update') {
-      ref
-          .watch(manageBooksProvider.notifier)
-          .updateBook(Book(title: enteredBookName));
     }
 
     Navigator.of(context).pop();

@@ -50,7 +50,6 @@ class ManageExpenseNotifier extends StateNotifier<List<Expense>> {
           isCashIn: row['isCashIn'] as String == 'true' ? true : false,
           bookId: row['bookId'] as String);
     }).toList();
-    print('Expense Loaded');
     state = expenses;
   }
 
@@ -66,7 +65,6 @@ class ManageExpenseNotifier extends StateNotifier<List<Expense>> {
       'remarks': expense.remarks,
       'isCashIn': expense.isCashIn.toString(),
     });
-    print('Expense Added!');
     state = [...state, expense];
   }
 }
