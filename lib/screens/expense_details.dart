@@ -1,15 +1,17 @@
 import 'package:daily_expense/models/expense.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:daily_expense/providers/manage_expense_provider.dart';
 
 final formater = DateFormat.yMMMEd();
 
-class Details extends StatelessWidget {
+class Details extends ConsumerWidget {
   const Details({super.key, required this.expense});
   final Expense expense;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Entry Details"),
@@ -54,7 +56,7 @@ class Details extends StatelessWidget {
                     Text(
                       "On ${formater.format(expense.date)}, ${expense.time.format(context)}",
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.onBackground),
+                          color: Theme.of(context).colorScheme.onSurface),
                     ),
                   ],
                 ),
@@ -78,7 +80,7 @@ class Details extends StatelessWidget {
                 Text(
                   expense.remarks,
                   style: TextStyle(
-                      color: Theme.of(context).colorScheme.onBackground,
+                      color: Theme.of(context).colorScheme.onSurface,
                       fontSize:
                           Theme.of(context).textTheme.titleMedium!.fontSize),
                 ),
@@ -93,14 +95,39 @@ class Details extends StatelessWidget {
               color: Theme.of(context).colorScheme.outlineVariant,
               shape: BoxShape.rectangle,
             ),
-            child: TextButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.create_outlined),
-                label: const Text(
-                  "EDIT ENTRY",
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )),
-          )
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.create_outlined),
+                  label: const Text(
+                    "EDIT ENTRY",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    ref
+                        .read(manageExpenseProvider.notifier)
+                        .deleteExpense(expense);
+                    // AlertDialog()
+                    Navigator.of(context).pop();
+                  },
+                  icon: Icon(
+                    Icons.delete_forever,
+                    color: Theme.of(context).colorScheme.error,
+                  ),
+                  label: Text(
+                    "DELETE ENTRY",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.error),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

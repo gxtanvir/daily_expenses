@@ -67,6 +67,14 @@ class ManageExpenseNotifier extends StateNotifier<List<Expense>> {
     });
     state = [...state, expense];
   }
+
+  // Delete Expense
+  void deleteExpense(Expense expense) async {
+    final db = await _getDatabase();
+    await db
+        .delete('expense_details', where: 'id = ?', whereArgs: [expense.id]);
+    state = state.where((e) => e.id != expense.id).toList();
+  }
 }
 
 final manageExpenseProvider =
