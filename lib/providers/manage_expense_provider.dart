@@ -68,6 +68,15 @@ class ManageExpenseNotifier extends StateNotifier<List<Expense>> {
     state = [...state, expense];
   }
 
+  // Udpate Expense
+  void updateExpense(Expense expense) async {
+    final db = await _getDatabase();
+    await db.update(
+        'expense_details', {'title': expense.remarks, 'amount': expense.amount},
+        where: 'id = ?', whereArgs: [expense.id]);
+        state = state.map((e) => e.id == expense.id ? expense : e).toList();
+  }
+
   // Delete Expense
   void deleteExpense(Expense expense) async {
     final db = await _getDatabase();
