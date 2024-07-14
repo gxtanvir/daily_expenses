@@ -108,11 +108,33 @@ class Details extends ConsumerWidget {
                 ),
                 TextButton.icon(
                   onPressed: () {
-                    ref
-                        .read(manageExpenseProvider.notifier)
-                        .deleteExpense(expense);
-                    // AlertDialog()
-                    Navigator.of(context).pop();
+                    showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.surfaceBright,
+                              title: const Text('Delete Entry!'),
+                              content: const Text(
+                                  'Are you sure you want to delete?'),
+                              actions: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      ref
+                                          .read(manageExpenseProvider.notifier)
+                                          .deleteExpense(expense);
+
+                                      Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('Yes Confirm')),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child:const Text('No'))
+                              ],
+                            ));
+                    // Navigator.of(context).pop();
                   },
                   icon: Icon(
                     Icons.delete_forever,
