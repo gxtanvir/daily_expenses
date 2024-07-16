@@ -122,6 +122,33 @@ class Details extends ConsumerWidget {
                                       ref
                                           .read(manageExpenseProvider.notifier)
                                           .deleteExpense(expense);
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Entry Successfully Deleted',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onInverseSurface,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                          backgroundColor: Theme.of(context)
+                                              .colorScheme
+                                              .inverseSurface,
+                                          showCloseIcon: true,
+                                          closeIconColor: Theme.of(context)
+                                              .colorScheme
+                                              .onInverseSurface,
+                                          duration: const Duration(seconds: 3),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12)),
+                                          behavior: SnackBarBehavior.floating,
+                                          margin: const EdgeInsets.only(
+                                              bottom: 200, left: 10, right: 10),
+                                        ),
+                                      );
 
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
@@ -131,7 +158,7 @@ class Details extends ConsumerWidget {
                                     onPressed: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child:const Text('No'))
+                                    child: const Text('No'))
                               ],
                             ));
                     // Navigator.of(context).pop();

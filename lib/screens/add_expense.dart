@@ -74,6 +74,24 @@ class _AddExpense extends ConsumerState<AddExpense> {
           remarks: _remarks,
           bookId: widget.book.id,
           isCashIn: _isCashIn ? true : false));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'New Entry Added',
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onInverseSurface,
+                fontWeight: FontWeight.w400),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.inverseSurface,
+          showCloseIcon: true,
+          closeIconColor: Theme.of(context).colorScheme.onInverseSurface,
+          duration: const Duration(seconds: 3),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          behavior: SnackBarBehavior.floating,
+          margin: const EdgeInsets.only(bottom: 200, left: 10, right: 10),
+        ),
+      );
     }
   }
 
@@ -233,6 +251,7 @@ class _AddExpense extends ConsumerState<AddExpense> {
                     textStyle: const TextStyle(fontWeight: FontWeight.bold)),
                 onPressed: () {
                   _addExpense();
+                  _formkey.currentState!.reset();
                 },
                 child: const Text("SAVE & ADD NEW")),
             const SizedBox(width: 14),
